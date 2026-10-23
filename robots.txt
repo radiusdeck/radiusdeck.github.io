@@ -1,0 +1,9 @@
+---
+layout: null
+sitemap: false
+---
+# All crawlers, including search and AI answer engines, may read the site.
+User-agent: *
+Allow: /
+
+Sitemap: {{ '/sitemap.xml' | absolute_url }}

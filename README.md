@@ -37,13 +37,34 @@ JEKYLL_ENV=production bundle _2.6.9_ exec jekyll build --strict_front_matter
 python3 scripts/check_site.py
 ```
 
-The checker requires the homepage and 404 page, then verifies local `href` and
-`src` targets and HTML fragment IDs. It does not check external URLs or CSS URLs.
-Also inspect the homepage on a narrow screen before publishing.
+The checker requires the homepage, 404 page, `sitemap.xml`, `feed.xml`, and
+`robots.txt`. It verifies local `href` and `src` targets and HTML fragment IDs.
+For every page except 404, it requires a title, a meta description, a canonical
+URL that matches the page, and no `noindex`; the 404 page must be `noindex`.
+The sitemap must list exactly the indexable pages, `robots.txt` must point to it,
+and JSON-LD blocks must parse. External URLs and CSS URLs are not checked.
+Also inspect new or changed pages at phone width before publishing.
 
-The initial production build, frozen dependency check, and generated local
-links passed on 2026-10-23 with Ruby 3.4.12 and Bundler 2.6.9. Browser rendering
-and GitHub-hosted workflows have not yet been verified.
+The production build, frozen dependency check, and checker passed on
+2026-10-23 with Ruby 3.4.12 and Bundler 2.6.9. The same day, the homepage,
+`/blog/`, `/about/`, 404, and a draft article were rendered in headless Chromium
+at 375 px and 1280 px without horizontal page scrolling. The GitHub-hosted
+workflow runs have not yet been reviewed.
+
+## Drafts
+
+Article drafts live in `_drafts/`, which is ignored by Git, so unfinished text
+does not appear in this public repository. Preview and check them locally:
+
+```bash
+bundle _2.6.9_ exec jekyll serve --drafts
+JEKYLL_ENV=production bundle _2.6.9_ exec jekyll build --strict_front_matter --drafts
+python3 scripts/check_site.py
+```
+
+The workflows build without `--drafts`, so CI does not check draft content.
+To publish, move the reviewed file to `_posts/YYYY-MM-DD-<slug>.md` and add it
+in the release pull request. The URL stays `/blog/<slug>/`.
 
 ## Publishing
 
@@ -57,8 +78,8 @@ GitHub Actions**. This setting has already been selected by the repository owner
 - The deployment uses the `github-pages` environment and the built-in GitHub
   token. Configure the environment's deployment branch rule to allow only `main`.
 
-Pushing this scaffold to `main` will attempt to publish the initial homepage.
-The first public deployment has not yet been verified.
+The first deployment of the initial homepage to <https://radiusdeck.github.io/>
+was confirmed by the repository owner.
 
 ## Troubleshooting and rollback
 
@@ -69,7 +90,34 @@ deployment fails, check the Pages source and `github-pages` environment rules.
 To undo a published change, revert its commit, verify the resulting build, and
 push the revert to `main`. This triggers publication of the restored content.
 
-## Next stage
+## Site structure
 
-Add the article layout, blog index, About page, sitemap, RSS, and the first three
-reviewed guides. Article URLs follow `/blog/<slug>/`.
+| Path | Purpose |
+| --- | --- |
+| `_layouts/default.html` | Page shell: header navigation, footer |
+| `_layouts/post.html` | Article: title, author, publication, update and test dates, related guides |
+| `_includes/head.html` | Title, description, canonical URL, Open Graph, feed link, JSON-LD (`TechArticle` for articles, `WebSite` for the homepage) |
+| `blog.md`, `about.md` | `/blog/` list of guides and `/about/` page |
+| `sitemap.xml`, `feed.xml`, `robots.txt` | Liquid templates; no Jekyll plugins are used |
+
+Article front matter:
+
+```yaml
+title: "FreeRADIUS clients.conf: Examples and Best Practices"
+description: One or two sentences for search results and the guide list.
+last_modified_at: 2026-11-02   # only after a substantial update
+tested:
+  date: 2026-10-23
+  environment: Official FreeRADIUS Docker image
+  freeradius: "3.2.10"
+  radiusdeck: "0.1.0"
+related:
+  - /blog/<slug>/
+```
+
+The author (`RadiusDeck team`) and the `post` layout come from `_config.yml`
+defaults. The layout prints the title as the page heading, so the article body
+starts without an H1. Related guides appear only when the target article is
+published.
+
+`robots.txt` allows all crawlers, including AI search crawlers.
