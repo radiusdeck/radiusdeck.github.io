@@ -5,3 +5,6 @@
 /vendor/
 __pycache__/
 *.pyc
+
+# Article drafts stay local until release; see README "Drafts".
+/_drafts/
