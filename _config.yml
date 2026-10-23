@@ -13,11 +13,21 @@ strict_front_matter: true
 future: false
 show_drafts: false
 
+author:
+  name: RadiusDeck team
+  url: /about/
+product_url: https://github.com/radiusdeck/radiusdeck
+
 defaults:
   - scope:
       path: ""
     values:
       layout: default
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
 
 exclude:
   - README.md

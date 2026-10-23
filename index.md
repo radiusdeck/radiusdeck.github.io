@@ -22,11 +22,24 @@ that walks through adding a client and checking a real authentication request.
 
 [Explore RadiusDeck on GitHub →](https://github.com/radiusdeck/radiusdeck){: .button }
 
-## Guides in preparation
+## Guides
 
+{% if site.posts.size > 0 -%}
+<ul class="post-list">
+{%- for post in site.posts limit: 3 %}
+  <li>
+    <h3><a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a></h3>
+    <p>{{ post.description | strip_html | normalize_whitespace | escape }}</p>
+  </li>
+{%- endfor %}
+</ul>
+
+[All guides →]({{ '/blog/' | relative_url }})
+{%- else -%}
 Our first guides will cover `clients.conf` examples, diagnosing unknown client
 errors, and managing RADIUS clients through the web interface.
 
 In the meantime, browse the
-[Community documentation](https://github.com/radiusdeck/radiusdeck/tree/main/docs/community)
+[Community documentation]({{ site.product_url }}/tree/main/docs/community)
 for configuration and operating details.
+{%- endif %}
