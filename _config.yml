@@ -1,0 +1,30 @@
+title: RadiusDeck Blog
+description: >-
+  Practical FreeRADIUS guides: client configuration, troubleshooting,
+  and web-based management with RadiusDeck.
+lang: en
+url: https://radiusdeck.github.io
+baseurl: ""
+permalink: /blog/:slug/
+timezone: UTC
+markdown: kramdown
+highlighter: rouge
+strict_front_matter: true
+future: false
+show_drafts: false
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      layout: default
+
+exclude:
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - scripts
+  - .github
+  - .bundle
+  - .ruby-version
