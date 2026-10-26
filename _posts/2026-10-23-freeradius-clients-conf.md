@@ -48,8 +48,9 @@ in `mods-config/files/authorize` or an SQL database.
 
 `clients.conf` answers one question: which devices may talk to this server, and
 which shared secret each of them uses. Requests from an address that matches no
-client are ignored; the log message is shown under
-[Unknown client](#unknown-client).
+client are ignored. The log message is shown under
+[Unknown client](#unknown-client); causes and fixes are in
+[How to Fix FreeRADIUS Unknown Client Errors](/blog/freeradius-unknown-client/).
 
 ## Minimal client example
 
@@ -370,6 +371,9 @@ from the host to the published port `127.0.0.1:18121` arrived from the Docker
 network gateway `10.88.10.1`; the result depends on the Docker network
 configuration. If the client is already in the file, restart FreeRADIUS: a
 client added after startup is not loaded yet.
+
+For the other causes and how to confirm the fix, see
+[How to Fix FreeRADIUS Unknown Client Errors](/blog/freeradius-unknown-client/).
 
 ## Frequently asked questions
 
