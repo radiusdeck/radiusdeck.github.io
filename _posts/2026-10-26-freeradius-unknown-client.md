@@ -356,10 +356,10 @@ part with [RadiusDeck](https://github.com/radiusdeck/radiusdeck), an
 open-source web interface for `clients.conf`. It edits the file in place,
 which avoids the single-file Docker mount problem described above, and creates
 a backup before each change. You still apply the change by restarting
-FreeRADIUS, or through an optional reload sidecar. The
-[RadiusDeck README](https://github.com/radiusdeck/radiusdeck#readme) covers
-installation; its demo starts from an unknown client error and ends with a
-successful request.
+FreeRADIUS, or through an optional reload sidecar.
+[FreeRADIUS Web GUI: How to Manage RADIUS Clients](/blog/freeradius-web-gui/)
+shows the setup step by step, from installation to a successful `radtest`
+request.
 
 ## Sources
 

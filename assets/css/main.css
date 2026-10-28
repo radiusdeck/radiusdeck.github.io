@@ -71,6 +71,9 @@ th, td { padding: .45rem .75rem; border: 1px solid var(--line); text-align: left
 th { background: #e7ede8; }
 td code { overflow-wrap: normal; white-space: nowrap; }
 li > p { margin-block: .5rem; }
+/* Screenshots: an image and its italic caption in one paragraph. */
+.post p > img { display: block; max-width: 100%; height: auto; border: 1px solid var(--line); border-radius: .3rem; }
+.post p > img + em { display: block; margin-top: .4rem; color: var(--muted); font-size: .9rem; }
 .related { margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--line); }
 
 /* Lists of guides */

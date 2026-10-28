@@ -426,9 +426,9 @@ each change. You still apply changes by restarting FreeRADIUS, or through an
 optional reload sidecar. RadiusDeck manages clients only; user accounts and
 authentication policies stay in FreeRADIUS.
 
-The [RadiusDeck README](https://github.com/radiusdeck/radiusdeck#readme)
-covers installation, and its demo adds a client and checks a real
-authentication request against FreeRADIUS.
+[FreeRADIUS Web GUI: How to Manage RADIUS Clients](/blog/freeradius-web-gui/)
+shows the setup step by step: running RadiusDeck next to FreeRADIUS, adding
+and editing a client, applying the change, and testing it with `radtest`.
 
 ## Sources
 
