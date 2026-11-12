@@ -8,6 +8,8 @@ tested:
   date: 2026-11-06
   environment: Docker 29.9.3 on Ubuntu 24.04
   openldap: "2.6.15, image instantlinux/openldap:2.6.15-r0"
+related:
+  - /blog/freeradius-ldap/
 ---
 
 **Short answer:** This guide builds a disposable OpenLDAP lab in Docker with
